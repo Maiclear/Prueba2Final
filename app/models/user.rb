@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   def default_role
     self.role ||= 1
+    true
   end
 
   def to_s
