@@ -1,4 +1,5 @@
 class ProyectsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_proyect, only: [:show, :edit, :update, :destroy]
 
   # GET /proyects
@@ -10,6 +11,7 @@ class ProyectsController < ApplicationController
   # GET /proyects/1
   # GET /proyects/1.json
   def show
+
   end
 
   # GET /proyects/new
@@ -25,7 +27,7 @@ class ProyectsController < ApplicationController
   # POST /proyects.json
   def create
     @proyect = Proyect.new(proyect_params)
-
+    @proyect.user = current_user if user_signed_in?
     respond_to do |format|
       if @proyect.save
         format.html { redirect_to @proyect, notice: 'Proyect was successfully created.' }

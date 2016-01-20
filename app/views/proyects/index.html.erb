@@ -2,30 +2,46 @@
 
 <h1>Listing Proyects</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
       <th>User</th>
-      <th colspan="3"></th>
+      <th>Proyectos Pendientes</th>
+      <th colspan="3"> Opciones</th>
     </tr>
   </thead>
 
   <tbody>
     <% @proyects.each do |proyect| %>
       <tr>
-        <td><%= proyect.name %></td>
+        <td><%= link_to "#{proyect.name}", proyect %></td>
         <td><%= proyect.description %></td>
         <td><%= proyect.user %></td>
-        <td><%= link_to 'Show', proyect %></td>
-        <td><%= link_to 'Edit', edit_proyect_path(proyect) %></td>
-        <td><%= link_to 'Destroy', proyect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
+        <td><%= link_to proyect , class: 'show' do %>
+            <span class="icon-eye" aria-hidden="true"></span>
+            <% end %>
+        </td>
+        <% if can? :update, proyect %>
+          <td><%= link_to edit_proyect_path(proyect), class: 'edit' do %>
+            <span class="icon-cog" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        <% end %>
+        <% if can? :destroy, proyect %>
+          <td><%= link_to proyect, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="icon-trash" aria-hidden="true"></span>
+            <% end %>
+        </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Proyect', new_proyect_path %>
+<% if can? :create, Proyect %>
+  <%= link_to 'New Proyect', new_proyect_path %>
+<% end %>

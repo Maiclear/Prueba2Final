@@ -17,3 +17,17 @@
 
 <%= link_to 'Edit', edit_proyect_path(@proyect) %> |
 <%= link_to 'Back', proyects_path %>
+<br>
+<% if can? :update, @proyect %>
+  <%= link_to edit_proyect_path(@proyect), class: 'btn btn-success-outline btn-sm' do %>
+      <span class="icon-pencil" aria-hidden="true"></span>
+      Editar
+    <% end %>
+<% end %>
+
+<%= link_to proyects_path,  class: 'btn btn-success-outline btn-sm' do %>
+    <span class="icon-back" aria-hidden="true"></span>
+    Volver
+    <% end %>
+<br>
+<br>

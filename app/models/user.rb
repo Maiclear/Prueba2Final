@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   before_save :default_role
 
   has_many :proyects, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
