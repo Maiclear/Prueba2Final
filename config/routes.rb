@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :proyects
+  resources :tasks, only: :index
+
+  resources :proyects do
+    resources :tasks
+  end
 
 
 

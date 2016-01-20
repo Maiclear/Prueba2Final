@@ -12,6 +12,7 @@ class ProyectsController < ApplicationController
   # GET /proyects/1.json
   def show
 
+    @tasks = Task.where("user_id = ?", current_user.id)
   end
 
   # GET /proyects/new
